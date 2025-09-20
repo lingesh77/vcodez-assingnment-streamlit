@@ -1,9 +1,5 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-from PIL import Image
-import numpy as np
 
 # Page configuration
 st.set_page_config(
@@ -174,7 +170,7 @@ if current_section == "home":
         """, unsafe_allow_html=True)
     
     # Quick stats
-    st.markdown('<h2 class="section-header">📈 Quick Stats</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-header">📈 Quick Overview</h2>', unsafe_allow_html=True)
     
     col1, col2, col3, col4 = st.columns(4)
     
@@ -189,7 +185,7 @@ if current_section == "home":
     with col2:
         st.markdown("""
         <div class="metric-card">
-            <h2 style="color: #10B981;">50+</h2>
+            <h2 style="color: #10B981;">Multiple</h2>
             <p>Applications</p>
         </div>
         """, unsafe_allow_html=True)
@@ -197,7 +193,7 @@ if current_section == "home":
     with col3:
         st.markdown("""
         <div class="metric-card">
-            <h2 style="color: #F59E0B;">10+</h2>
+            <h2 style="color: #F59E0B;">Various</h2>
             <p>Industries</p>
         </div>
         """, unsafe_allow_html=True)
@@ -277,14 +273,6 @@ elif current_section == "types":
             with col2:
                 st.markdown("**Architecture:**")
                 st.code(agent['diagram'], language=None)
-                
-                # Add a simple performance metric visualization
-                if agent['title'] == "Learning Agents":
-                    performance_data = np.random.exponential(scale=2, size=100).cumsum()
-                    fig = px.line(x=range(len(performance_data)), y=performance_data, 
-                                title="Learning Curve Example")
-                    fig.update_layout(height=200, margin=dict(l=0, r=0, t=30, b=0))
-                    st.plotly_chart(fig, use_container_width=True)
 
 # Applications Section
 elif current_section == "applications":
@@ -325,61 +313,58 @@ elif current_section == "applications":
     
     with tab2:
         st.markdown("### Finance Applications")
-        col1, col2 = st.columns([2, 1])
+        st.markdown("""
+        **Trading Systems (Utility-based)**
+        - Algorithmic trading
+        - Risk management
+        - Portfolio optimization
         
-        with col1:
-            st.markdown("""
-            **Trading Systems (Utility-based)**
-            - Algorithmic trading
-            - Risk management
-            - Portfolio optimization
-            
-            **Fraud Detection (Learning)**
-            - Pattern recognition
-            - Anomaly detection
-            - Real-time monitoring
-            
-            **Customer Service (Reactive)**
-            - Chatbots for banking
-            - Automated responses
-            - Basic query handling
-            """)
+        **Fraud Detection (Learning)**
+        - Pattern recognition
+        - Anomaly detection
+        - Real-time monitoring
         
-        with col2:
-            # Create a pie chart for finance applications
-            finance_data = {
-                'Application': ['Trading', 'Fraud Detection', 'Customer Service', 'Risk Analysis', 'Others'],
-                'Percentage': [30, 25, 20, 15, 10]
-            }
-            fig = px.pie(finance_data, values='Percentage', names='Application', 
-                        title='AI Agent Distribution in Finance')
-            st.plotly_chart(fig, use_container_width=True)
+        **Customer Service (Reactive)**
+        - Chatbots for banking
+        - Automated responses
+        - Basic query handling
+        
+        **Risk Analysis (Model-based)**
+        - Credit scoring
+        - Market prediction
+        - Regulatory compliance
+        """)
     
     with tab3:
         st.markdown("### Healthcare Applications")
         
-        healthcare_apps = {
-            'Agent Type': ['Reactive', 'Model-based', 'Goal-based', 'Utility-based', 'Learning'],
-            'Healthcare Application': [
-                'Vital sign monitors',
-                'Diagnostic imaging',
-                'Treatment planning',
-                'Drug discovery',
-                'Personalized medicine'
-            ],
-            'Impact Score': [7, 8, 9, 8, 10]
-        }
-        
-        col1, col2 = st.columns([1, 2])
+        col1, col2 = st.columns(2)
         
         with col1:
-            df_health = pd.DataFrame(healthcare_apps)
-            st.dataframe(df_health, hide_index=True)
+            st.markdown("""
+            **Diagnostic Systems (Model-based)**
+            - Medical imaging analysis
+            - Symptom assessment
+            - Disease prediction
+            
+            **Treatment Planning (Goal-based)**
+            - Personalized therapy
+            - Drug dosage optimization
+            - Surgery planning
+            """)
         
         with col2:
-            fig = px.bar(healthcare_apps, x='Agent Type', y='Impact Score', 
-                        title='Impact Score by Agent Type in Healthcare')
-            st.plotly_chart(fig, use_container_width=True)
+            st.markdown("""
+            **Patient Monitoring (Reactive)**
+            - Vital sign alerts
+            - Emergency response
+            - Real-time tracking
+            
+            **Drug Discovery (Learning)**
+            - Molecular analysis
+            - Clinical trial optimization
+            - Side effect prediction
+            """)
     
     with tab4:
         st.markdown("### Education Applications")
@@ -398,39 +383,36 @@ elif current_section == "applications":
         - Enrollment processing
         - Scheduling systems
         - Basic student queries
-        """)
         
-        # Education metrics
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.metric("Student Engagement", "85%", "+12%")
-        with col2:
-            st.metric("Learning Efficiency", "78%", "+25%")
-        with col3:
-            st.metric("Cost Reduction", "45%", "+8%")
+        **Content Recommendation (Utility-based)**
+        - Learning material suggestions
+        - Study plan optimization
+        - Progress evaluation
+        """)
     
     with tab5:
         st.markdown("### Customer Service Applications")
+        st.markdown("""
+        **Chatbots (Reactive Agents)**
+        - FAQ responses
+        - Basic problem solving
+        - Information retrieval
         
-        # Interactive chart showing customer service agent evolution
-        cs_evolution = {
-            'Year': [2020, 2021, 2022, 2023, 2024, 2025],
-            'Reactive Agents': [60, 55, 45, 35, 25, 20],
-            'Learning Agents': [10, 15, 25, 35, 45, 50],
-            'Hybrid Systems': [30, 30, 30, 30, 30, 30]
-        }
+        **Smart Assistants (Model-based)**
+        - Context-aware responses
+        - Multi-turn conversations
+        - User preference learning
         
-        fig = go.Figure()
-        fig.add_trace(go.Scatter(x=cs_evolution['Year'], y=cs_evolution['Reactive Agents'], 
-                                mode='lines+markers', name='Reactive Agents'))
-        fig.add_trace(go.Scatter(x=cs_evolution['Year'], y=cs_evolution['Learning Agents'], 
-                                mode='lines+markers', name='Learning Agents'))
-        fig.add_trace(go.Scatter(x=cs_evolution['Year'], y=cs_evolution['Hybrid Systems'], 
-                                mode='lines+markers', name='Hybrid Systems'))
+        **Support Routing (Goal-based)**
+        - Ticket prioritization
+        - Agent assignment
+        - Problem categorization
         
-        fig.update_layout(title='Evolution of Customer Service AI Agents',
-                         xaxis_title='Year', yaxis_title='Usage Percentage (%)')
-        st.plotly_chart(fig, use_container_width=True)
+        **Sentiment Analysis (Learning)**
+        - Customer mood detection
+        - Satisfaction prediction
+        - Feedback analysis
+        """)
 
 # Comparison Section
 elif current_section == "comparison":
@@ -456,44 +438,49 @@ elif current_section == "comparison":
     
     st.markdown("---")
     
-    # Feature comparison charts
+    # Feature comparison in columns
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown("### ⚡ Performance Characteristics")
-        performance_data = {
+        st.markdown("### ⚡ Advantages & Disadvantages")
+        
+        advantages = {
             'Agent Type': ['Reactive', 'Model-based', 'Goal-based', 'Utility-based', 'Learning'],
-            'Speed': [9, 7, 6, 5, 4],
-            'Accuracy': [6, 7, 8, 9, 8],
-            'Flexibility': [2, 4, 7, 6, 9]
+            'Main Advantage': [
+                'Very fast response',
+                'Handles uncertainty well',
+                'Flexible problem solving',
+                'Optimal decision making',
+                'Continuous improvement'
+            ],
+            'Main Disadvantage': [
+                'No learning ability',
+                'Complex to build',
+                'Computationally expensive',
+                'Requires utility functions',
+                'Unpredictable behavior'
+            ]
         }
         
-        fig = go.Figure()
-        fig.add_trace(go.Scatterpolar(r=performance_data['Speed'], theta=performance_data['Agent Type'], 
-                                     fill='toself', name='Speed'))
-        fig.add_trace(go.Scatterpolar(r=performance_data['Accuracy'], theta=performance_data['Agent Type'], 
-                                     fill='toself', name='Accuracy'))
-        fig.add_trace(go.Scatterpolar(r=performance_data['Flexibility'], theta=performance_data['Agent Type'], 
-                                     fill='toself', name='Flexibility'))
-        
-        fig.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 10])), showlegend=True)
-        st.plotly_chart(fig, use_container_width=True)
+        df_advantages = pd.DataFrame(advantages)
+        st.dataframe(df_advantages, use_container_width=True, hide_index=True)
     
     with col2:
-        st.markdown("### 💰 Cost vs Benefit Analysis")
-        cost_benefit = {
+        st.markdown("### 💡 When to Use Each Type")
+        
+        usage_guide = {
             'Agent Type': ['Reactive', 'Model-based', 'Goal-based', 'Utility-based', 'Learning'],
-            'Development Cost': [1, 3, 5, 7, 9],
-            'Business Value': [3, 5, 7, 8, 10],
-            'ROI Score': [3, 1.67, 1.4, 1.14, 1.11]  # Value/Cost ratio
+            'Ideal Scenarios': [
+                'Simple, predictable environments',
+                'Partially observable environments',
+                'Complex planning required',
+                'Multiple objectives to balance',
+                'Unknown/changing environments'
+            ]
         }
         
-        fig = px.scatter(cost_benefit, x='Development Cost', y='Business Value', 
-                        size='ROI Score', hover_name='Agent Type',
-                        title='Cost vs Benefit Analysis',
-                        labels={'Development Cost': 'Development Cost (1-10)', 
-                               'Business Value': 'Business Value (1-10)'})
-        st.plotly_chart(fig, use_container_width=True)
+        df_usage = pd.DataFrame(usage_guide)
+        st.dataframe(df_usage, use_container_width=True, hide_index=True)
     
     # Decision matrix
     st.markdown("### 🤔 Decision Matrix: Which Agent Type to Choose?")
@@ -574,16 +561,14 @@ elif current_section == "about":
     with col2:
         st.markdown("""
         <div class="callout-success">
-            <h3>👨‍💻 About the Creator</h3>
+            <h3 style="color: #059669;">👨‍💻 About the Creator</h3>
             <p><strong>AI Development Team</strong></p>
-            <p>Passionate about making AI education accessible and engaging for everyone.</p>
+            <p style="color: #374151;">Passionate about making AI education accessible and engaging for everyone.</p>
             
-            <h4>🔗 Useful Links</h4>
-            <ul>
-                <li><a href="https://streamlit.io" target="_blank">Streamlit Documentation</a></li>
-                <li><a href="https://plotly.com/python/" target="_blank">Plotly Python</a></li>
-                <li><a href="https://pandas.pydata.org" target="_blank">Pandas Documentation</a></li>
-                <li><a href="https://github.com" target="_blank">Source Code</a></li>
+            <h4 style="color: #059669;">🔗 Useful Links</h4>
+            <ul style="color: #374151;">
+                <li><a href="https://streamlit.io" target="_blank" style="color: #3B82F6; text-decoration: none;">📚 Streamlit Documentation</a></li>
+                <li><a href="https://github.com" target="_blank" style="color: #3B82F6; text-decoration: none;">💻 Source Code Repository</a></li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
@@ -593,12 +578,12 @@ elif current_section == "about":
         stat_col1, stat_col2 = st.columns(2)
         
         with stat_col1:
-            st.metric("Lines of Code", "400+")
-            st.metric("Interactive Charts", "8")
+            st.metric("Lines of Code", "300+")
+            st.metric("Agent Types", "5")
         
         with stat_col2:
-            st.metric("Agent Types", "5")
             st.metric("Application Examples", "20+")
+            st.metric("Interactive Sections", "5")
     
     st.markdown("---")
     
