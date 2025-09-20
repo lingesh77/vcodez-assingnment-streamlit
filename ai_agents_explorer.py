@@ -434,7 +434,7 @@ elif current_section == "comparison":
     
     # Display the comparison table with custom styling
     st.markdown("### 🔍 Detailed Comparison Table")
-    st.dataframe(df_comparison, use_container_width=True, hide_index=True)
+    st.dataframe(df_comparison, width='stretch', hide_index=True)
     
     st.markdown("---")
     
@@ -463,7 +463,7 @@ elif current_section == "comparison":
         }
         
         df_advantages = pd.DataFrame(advantages)
-        st.dataframe(df_advantages, use_container_width=True, hide_index=True)
+    st.dataframe(df_advantages, width='stretch', hide_index=True)
     
     with col2:
         st.markdown("### 💡 When to Use Each Type")
@@ -480,7 +480,7 @@ elif current_section == "comparison":
         }
         
         df_usage = pd.DataFrame(usage_guide)
-        st.dataframe(df_usage, use_container_width=True, hide_index=True)
+    st.dataframe(df_usage, width='stretch', hide_index=True)
     
     # Decision matrix
     st.markdown("### 🤔 Decision Matrix: Which Agent Type to Choose?")
@@ -610,7 +610,7 @@ elif current_section == "about":
         </div>
         """, unsafe_allow_html=True)
         
-        rating = st.select_slider("", options=["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"])
+    rating = st.select_slider("Rate this app:", options=["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"])
         
         if st.button("Submit Rating"):
             st.balloons()
