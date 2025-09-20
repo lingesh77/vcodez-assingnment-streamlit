@@ -320,7 +320,7 @@ comparison_data = {
 }
 
 df = pd.DataFrame(comparison_data)
-st.dataframe(df, use_container_width=True, hide_index=True)
+st.dataframe(df, width='stretch', hide_index=True)
 
 st.markdown('</div></div>', unsafe_allow_html=True)
 
@@ -392,7 +392,7 @@ scenarios = {
     "Email Spam Detection": {
         "agent": "Learning Agent 📚", 
         "reason": "Gets better at detecting new spam patterns over time",
-        "color": "#F0FDF4"
+        "color": "#FDF2F8"
     },
     "GPS Route Planning": {
         "agent": "Model-based Agent 🧠",
@@ -432,10 +432,10 @@ with st.expander("💬 Share Your Thoughts"):
     
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("👍 Helpful", use_container_width=True):
+        if st.button("👍 Helpful", width='stretch'):
             st.success("Thanks for the positive feedback! 😊")
     with col2:
-        if st.button("📝 Submit Feedback", use_container_width=True):
+        if st.button("📝 Submit Feedback", width='stretch'):
             if feedback:
                 st.success("Thank you for your detailed feedback! 🙏")
             else:
